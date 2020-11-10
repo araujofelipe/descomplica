@@ -1,0 +1,6 @@
+4) Suponha que você esteja trabalhando na API de um microsserviço, melhorando um endpoint que grava em que ponto de um vídeo um usuário está. Atualmente, essa informação é gravada no mesmo banco de dados onde as demais informações dos vídeos são armazenadas (nome, descrição, matéria, professor etc). 
+Com o aumento do número de usuários, o grande volume de escritas exigidas por esse endpoint tem impactado os demais endpoints da API. Ainda assim, o time de produto deseja aumentar a frequência do tracking de 15s para 5s, ou seja, guardaremos as posições dos usuários nos vídeos a cada 5s. Que soluções você veria para atender a esse requisito sem causar a piora do tempo de resposta do resto da API?
+
+
+**Resposta**:
+Talvez, eu isolaria as requisições do endpoint de gravação do ponto de vídeo, para um serviço de mensageria (activemq, rabbitmq etc) para ser processado posteriormente liberando o fluxo da api. Dessa forma, seria possível escalar horizontalmente a aplicação, colocando um servidor exclusivo para processamento das mensagens, liberando o restante da API.
